@@ -49,7 +49,3 @@ jobs:
           max-instances: 1
           allow-unauthenticated: true
         continue-on-error: true
-
-      - name: Print Cloud Run URL
-        run: echo "Cloud Run URL: ${{ steps.deploy.outputs.url }}" || true
-        continue-on-error: true
