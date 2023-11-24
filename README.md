@@ -8,10 +8,6 @@
 
 Explora los diferentes archivos YAML en la carpeta `/.github/workflows` para descubrir los diversos flujos de CI/CD que hemos creado. Cada uno tiene su propósito único, desde pruebas automatizadas hasta despliegues en la nube.
 
-### Despliegue Eficiente en Cloud Run
-
-La magia sucede cuando combinamos GitHub Actions con Google Cloud Run. ¿Cómo lo logramos? Echa un vistazo a la documentación en `docs/CloudRunSetup.md` para obtener instrucciones detalladas sobre cómo implementar tu propia aplicación en Cloud Run.
-
 ## 🛠️ Tecnologías Utilizadas
 
 - HTML, JavaScript, CSS para la interfaz de usuario.
