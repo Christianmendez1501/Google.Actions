@@ -29,7 +29,7 @@ jobs:
           GCP_REGION: ${{ secrets.GCP_CLOUDRUN_REGION }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          echo ${{ secrets.GCP_SA_KEY }} | base64 --decode > key.json
+          cat ${{ secrets.GCP_SA_KEY }} | base64 --decode > key.json
           gcloud auth activate-service-account --key-file=key.json
           gcloud auth configure-docker us-central1-docker.pkg.dev
           docker build -t us-central1-docker.pkg.dev/$GCP_PROJECT_ID/app-google:$IMAGE_TAG .
