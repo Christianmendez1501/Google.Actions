@@ -23,7 +23,7 @@ jobs:
             ${{ secrets.GCP_SA_KEY }}
             
       - name: Authenticate to Google Cloud Artifact Registry
-        run: gcloud auth configure-docker us-central1-docker.pkg.dev
+        run: gcloud auth configure-docker
             
       - name: Build and push Docker image to Artifact Registry
         id: build-image
