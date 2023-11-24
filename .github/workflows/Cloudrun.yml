@@ -22,17 +22,24 @@ jobs:
           service_account_key: |
             ${{ secrets.GCP_SA_KEY }}
             
+      - name: Authenticate to Google Cloud Artifact Registry
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev
+    
       - name: Build and push Docker image to Artifact Registry
         id: build-image
-        run: |
-          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/google-actions:${{ github.sha }} .
-          docker tag gcr.io/${{ secrets.GCP_PROJECT_ID }}/google-actions:${{ github.sha }} gcr.io/${{ secrets.GCP_PROJECT_ID }}/google-actions:latest
-          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/google-actions:${{ github.sha }}
-          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/google-actions:latest
         env:
-          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
-        
+              GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+              GCP_REGION: ${{ secrets.GCP_CLOUDRUN_REGION }}
+              IMAGE_TAG: ${{ github.sha }}
+        run: |
+              echo ${{ secrets.GCP_SA_KEY }} | base64 --decode > key.json
+              gcloud auth activate-service-account --key-file=key.json
+              docker build -t us-central1-docker.pkg.dev/$GCP_PROJECT_ID/app-google:$IMAGE_TAG .
+              docker push us-central1-docker.pkg.dev/$GCP_PROJECT_ID/app-google:$IMAGE_TAG
+              docker push us-central1-docker.pkg.dev/$GCP_PROJECT_ID/app-google:latest
+              echo "::set-output name=image::us-central1-docker.pkg.dev/$GCP_PROJECT_ID/app-google:$IMAGE_TAG"
+    
+
       - name: Deploy to Cloud Run
         id: deploy
         uses: google-github-actions/deploy-cloudrun@v1
