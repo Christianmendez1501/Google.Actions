@@ -32,4 +32,4 @@ Explora los diferentes archivos YAML en la carpeta `/.github/workflows` para des
 
 Siente la emoción de la experimentación y el despliegue continuo. ¡Abre issues, crea pull requests y comparte tus propias ideas! Este repositorio es un espacio para la colaboración y el aprendizaje conjunto.
 
-¡Espero que disfrutes explorando y creando! 🌟 Happy coding! 🚀✨
+¡Espero que disfrutes explorando y creando! 🌟 # Happy coding! 🚀✨
