@@ -1,9 +1,8 @@
 name: Deploy to Cloud Run
-
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -16,28 +15,32 @@ jobs:
           persist-credentials: false
 
       - name: Set up Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v1.0.0
+        uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
-          service_account_key: |
-            ${{ secrets.GCP_SA_KEY }}
-            
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
       - name: Build and push Docker image to Artifact Registry
         id: build-image
-        run: |
-          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/google-actions:${{ github.sha }} .
-          docker tag gcr.io/${{ secrets.GCP_PROJECT_ID }}/google-actions:${{ github.sha }} gcr.io/${{ secrets.GCP_PROJECT_ID }}/google-actions:latest
-          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/google-actions:${{ github.sha }}
-          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/google-actions:latest
         env:
           GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
-        
+          GCP_REGION: ${{ secrets.GCP_CLOUDRUN_REGION }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          echo ${{ secrets.GCP_SA_KEY }} | base64 --decode > key.json
+          gcloud auth activate-service-account --key-file=key.json
+          gcloud auth configure-docker us-central1-docker.pkg.dev
+          docker build -t us-central1-docker.pkg.dev/$GCP_PROJECT_ID/app-google:$IMAGE_TAG .
+          docker push us-central1-docker.pkg.dev/$GCP_PROJECT_ID/app-google:$IMAGE_TAG
+          docker push us-central1-docker.pkg.dev/$GCP_PROJECT_ID/app-google:latest
+          echo "::set-output name=image::us-central1-docker.pkg.dev/$GCP_PROJECT_ID/app-google:$IMAGE_TAG"
+
       - name: Deploy to Cloud Run
         id: deploy
         uses: google-github-actions/deploy-cloudrun@v1
         with:
-          image: gcr.io/${{ secrets.GCP_PROJECT_ID }}/google-actions:${{ github.sha }}
+          image: ${{ steps.build-image.outputs.image }}
           service: Google.Actions
           region: ${{ secrets.GCP_CLOUDRUN_REGION }}
           platform: managed
@@ -45,13 +48,8 @@ jobs:
           concurrency: 80
           max-instances: 1
           allow-unauthenticated: true
-
-      - name: Upload Outputs
-        uses: actions/upload-artifact@v2
-        with:
-          name: cloudrun-outputs
-          path: ${{ runner.workspace }}
+        continue-on-error: true
 
       - name: Print Cloud Run URL
-        run: |
-          echo "Cloud Run URL: ${{ steps.deploy.outputs.url }}" || true
+        run: echo "Cloud Run URL: ${{ steps.deploy.outputs.url }}" || true
+        continue-on-error: true
