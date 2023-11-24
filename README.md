@@ -28,9 +28,6 @@ Explora los diferentes archivos YAML en la carpeta `/.github/workflows` para des
 3. **Personaliza y Crea:**
    - Modifica el contenido HTML, mejora las funciones JavaScript o agrega tu propio toque creativo. ¡La imaginación es el límite!
 
-4. **¡Despliega en la Nube!**
-   - Sigue las instrucciones en `docs/CloudRunSetup.md` para implementar tu aplicación en Cloud Run.
-
 ## 🚀 ¡Empieza tu Propia Aventura!
 
 Siente la emoción de la experimentación y el despliegue continuo. ¡Abre issues, crea pull requests y comparte tus propias ideas! Este repositorio es un espacio para la colaboración y el aprendizaje conjunto.
