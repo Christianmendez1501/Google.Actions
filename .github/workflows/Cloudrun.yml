@@ -54,3 +54,4 @@ jobs:
 
       - name: Print Cloud Run URL
         run: echo "Cloud Run URL: ${{ steps.deploy.outputs.url }}"
+        continue-on-error: true
