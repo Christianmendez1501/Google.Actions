@@ -51,9 +51,3 @@ jobs:
         with:
           name: cloudrun-outputs
           path: ${{ runner.workspace }}
-          continue-on-error: true
-
-      - name: Print Cloud Run URL
-        continue-on-error: true
-        run: echo "Cloud Run URL: ${{ steps.deploy.outputs.url }}"
-        continue-on-error: true
