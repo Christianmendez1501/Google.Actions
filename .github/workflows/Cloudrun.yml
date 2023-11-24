@@ -49,4 +49,5 @@ jobs:
           allow-unauthenticated: true
 
       - name: "Cloud Run output"
-        run: 'curl "${{ steps.deploy.outputs.url }}"
+        run: |
+          curl "${{ steps.deploy.outputs.url }}"
