@@ -11,84 +11,101 @@
             }
         }
     </script>
-    <title>Tu Aplicación Web</title>
+    <title>Aplicación Web de Christian</title>
 </head>
 <body style="margin: 0; overflow: hidden;">
 
 <!-- Contenido del formulario -->
 <div id="content" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white;">
-    <h1>Formulario de Usuarios</h1>
+    <h1>Registrate</h1>
+    
+    <!-- Agregar sección para mostrar el mensaje -->
+    {% if mensaje %}
+        <p>{{ mensaje }}</p>
+    {% endif %}
+
     <form method="post">
-        <input type="text" name="nombre" placeholder="Nombre" style="margin-bottom: 10px;">
-        <input type="email" name="email" placeholder="Email" style="margin-bottom: 10px;">
-        <button type="submit">Enviar</button>
+        <input type="text" name="nombre" placeholder="Nombre" style="margin-bottom: 10px; background-color: #00000000; color: #fff">
+        <input type="email" name="email" placeholder="Email" style="margin-bottom: 10px; background-color: #00000000; color: #fff">
+        <button type="submit" style="background-color: #000; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Enviar</button>
     </form>
+
+    <!-- Agregar botón para ir a la tabla de usuarios -->
+    <a class="btn-formulario" href="/tabla_usuarios" style="background-color: #ffffff00; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin: 10px; box-shadow: 2px 2px 5px 0px #000000; animation: falling 2s infinite;">
+        Explora la tabla de Usuarios &#10148;
+      </a>
+      
 </div>
 
 <!-- Script para la animación con Three.js -->
 <script type="module">
     import * as THREE from 'three';
 
-    // Inicializar la escena
-    const camera = new THREE.PerspectiveCamera(1000, window.innerWidth / window.innerHeight, 0.09, 1000);
-    camera.position.z = 4;
+    // init
+    const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 10);
+    camera.position.z = 3;
 
     const scene = new THREE.Scene();
 
-    // Crear geometría y material para la nube
-    const cloudGeometry = new THREE.BufferGeometry();
-    const cloudMaterial = new THREE.PointsMaterial({
-        size: 0.05,
-        sizeAttenuation: true,
-        color: 0xffffff,
-        transparent: true,
-        opacity: 0.7,
-        map: new THREE.TextureLoader().load('https://threejsfundamentals.org/threejs/resources/images/wall.jpg'), // Textura de nube de ejemplo
-    });
+    const geometry = new THREE.BoxGeometry(0.005, 0.005, 0.005);
+    const material = new THREE.MeshNormalMaterial();
 
-    // Crear array de posiciones para las partículas de la nube
-    const cloudParticles = [];
-    for (let i = 0; i < 500; i++) {
-        const x = (Math.random() - 0.5) * 10;
-        const y = (Math.random() - 0.5) * 10;
-        const z = (Math.random() - 0.5) * 10;
-        cloudParticles.push(x, y, z);
+    // Crear un array de meshes
+    const meshes = [];
+    for (let i = 0; i < 5000; i++) {
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.position.set(
+            (Math.random() - 0.5) * 5,
+            (Math.random() - 0.5) * 5,
+            (Math.random() - 0.5) * 5
+        );
+        meshes.push(mesh);
+        scene.add(mesh);
     }
-
-    cloudGeometry.setAttribute('position', new THREE.Float32BufferAttribute(cloudParticles, 3));
-
-    // Crear el objeto de nube usando Points
-    const cloud = new THREE.Points(cloudGeometry, cloudMaterial);
-    scene.add(cloud);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
-    // Animación
-    function animation(time) {
-        // Rotar la nube en función del tiempo
-        cloud.rotation.x = time / 5000;
-        cloud.rotation.y = time / 1000;
+    // Variables para la posición y velocidad
+    const position = new THREE.Vector3();
+    const velocity = new THREE.Vector3();
 
-        renderer.render(scene, camera);
+    // Evento para seguir el puntero
+    document.addEventListener('mousemove', onMouseMove);
+
+    function onMouseMove(event) {
+        // Normalizar la posición del puntero en el rango [-1, 1]
+        const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+        const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+
+        // Actualizar la velocidad hacia la posición del puntero
+        velocity.x = (mouseX - position.x) * 0.05;
+        velocity.y = (mouseY - position.y) * 0.05;
     }
 
-    // Manejar el cambio de tamaño de la ventana
-    window.addEventListener('resize', () => {
-        const newWidth = window.innerWidth;
-        const newHeight = window.innerHeight;
+    // animation
 
-        camera.aspect = newWidth / newHeight;
-        camera.updateProjectionMatrix();
+    function animation() {
+        // Actualizar la posición según la velocidad
+        position.x += velocity.x;
+        position.y += velocity.y;
 
-        renderer.setSize(newWidth, newHeight);
-    });
+        // Actualizar las posiciones de cada objeto en el array
+        meshes.forEach((mesh) => {
+            mesh.position.add(velocity);
+            mesh.rotation.x += 0.01;
+            mesh.rotation.y += 0.02;
+        });
 
-    // Iniciar el bucle de animación
-    renderer.setAnimationLoop(animation);
+        renderer.render(scene, camera);
+
+        requestAnimationFrame(animation);
+    }
+
+    // Llamada inicial a la animación
+    animation();
 </script>
 
 </body>
 </html>
-
