@@ -1,0 +1,13 @@
+{
+    "type": "service_account",
+    "project_id": "optimum-rock-404123",
+    "private_key_id": "2a7c46551435363c923e932565a11583669a04a0",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCyvLlrQl4FuYCT\n5RSkkUEYlLYPzCuhifRAko3ktNLdhfsb+3J2ogmT3Zg9bxwsaLUWb4OHQMhgGMB9\nJajhG7fN0rRxveAEE3yrl+uDDMgZ8hzlZz5Q9n+JkjjU14IiKrFdkJZaFm/Usdho\npRvKaxMatGNL5AFVMqFIZjs//xv9CcDpBuMSiyOrCcFqp8tgzZjHA0ugr3IsDFgN\ncntuK8bn8l0k7hpuoYitl9DhlYYpPIjqSplaiuHuD9qy7PQh04EnpwdCCirrYDbj\nZgWa6phpgN+QIto5UVoNfAgl6oUQhS3HtV0zkI1y1CNjn7oUC542ESrSbTSGUw4D\noyQODnY7AgMBAAECggEABrK74CEklOJWxzQWifRHlDw+dmkYWX1qAeF8H84G+PZE\natAJghigc0Iiqmq3i5KA9s5HB5KN78v9qrL2mTkIslXrHTgYZQ615VhUIx0fgplo\nK9CqrS4PqYApURCid9VRwEfi2o1ss3PWwFUvrW5F0QJhlj59Lkwvbx8lqUhOLDVZ\nVPNNRNgsAcV3RXdeqaivkZUzTqwEB/30kwfTagoS7d0WvYpEmWWKgz/PGhUh9l51\n/kWgSdJhPW6qmoideQQFWFqGcnCpTjp89fMhZagUSpbN0bjoQQQZi1eDCi1xKiAU\ngbGI+44emEGDaKbzNwtaE9PbJj67U8DhWKl8V7p8wQKBgQDXKFeSRwVbwzkvX+bV\nH6Nc/VySqnvGEPRU7mkyZCrGvFmYA0+Jv01FIzbVaqxX+yogl28tbKnAmq+Mq5oX\nl2D+MFDg3UlXW7OJnuWQe4W1UTvV3dj3ssFoi/JuZ02AG/4gGk2Cm3YBN/0JTr/g\n+Cnkg1Q+V8qD74Rbkwcc1Bk5hwKBgQDUqoVj9XuvhUOJZcm0RWb6gkZRKE4TFrej\n9OJBVvt6wbFOcmZ49FFazoPCkFHTwZ+2NvZBdYXrJLBaaWK0WEJRT72s9sZF6wFm\nV6vjHL0TLnYxquqd8oMrGgbZxubiz7UPKQYC7Gs1rRHs05YQWpJj5PxnrHjVBUY+\nXs2KBLY6rQKBgQCWb8ejKHNPsNWIEVb1x1RTDXevuPIoD+y2gageKrlaEZHXXuE7\nH/4oDDIn0JlGPwA6n4eFzEd4uu9pvQZV3mtb725te2vvX9fNrsM2XZekqnLa2237\n6wmeTtOobCRdIbVyvtFZM9ezjHEpE93Hr9yiwUyi9oFL9Kmn2cqMVqR4ewKBgQDE\nVYlAd2nw6T8ooehNnaUssQjp9CPgS6DOpU4ctIkHE7r1iXhBQo25H99UyJhCvwcL\n2kIOvMkeBYkqbxDJHpJbLxsVi94Qvp1UNqxhyC5mfwZvZDOmDjY6nJSmiZKu4sNt\nc5oxKMLxkw5xbgWko3ly7/x2WixTvcLT4gIv4Zm7IQKBgBuB2N5ygysi5kNIJKy+\nTiJdTQ9Qp++BKEL0MOqe717pDKWNkcGIgTt4U2cOt6zLGzHnfduCersUzGKW95qI\nKqlJ3HTF9quVusFhOmKuh0CUn/U6MU9EOqG5pQics4K3XlzrK6HTgJ99hM+ov/C+\n0k3LBvMkh3EOQxBag36ksCRJ\n-----END PRIVATE KEY-----\n",
+    "client_email": "christian-338@optimum-rock-404123.iam.gserviceaccount.com",
+    "client_id": "105133222939290302995",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/christian-338%40optimum-rock-404123.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+}
