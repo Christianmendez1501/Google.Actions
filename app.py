@@ -82,7 +82,6 @@ def consulta():
         users = [user.to_dict() for user in users]
         return render_template('tabla_usuarios.html', data=users, user_id=user_id)
     else:
-        # Si no se proporciona la ID, mostrar un mensaje
         return render_template('tabla_usuarios.html', mensaje='Ingresa tu ID para ver tus datos')
 
 
