@@ -13,7 +13,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          persist-credentials: false
+          persist-credentials: true
 
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v1.0.0
